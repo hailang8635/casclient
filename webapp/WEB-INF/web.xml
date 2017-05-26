@@ -79,7 +79,7 @@
         <init-param>
             <!--这里的service 为提交的service 这里其实就是提交到你未配置cas的时候，在session 中放入username的地方。 -->
             <param-name>serverName</param-name>
-            <param-value>https://smart:7443/casclient/login.json</param-value>
+            <param-value>https://shanghai:7443/casclient/login.json</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -99,7 +99,7 @@
         <init-param>
             <!--这里的service 为提交的service 这里其实就是提交到你未配置cas的时候，在session 中放入username的地方。 -->
             <param-name>serverName</param-name>
-            <param-value>https://smart:7443/casclient/login.json</param-value>
+            <param-value>https://shanghai:7443/casclient/login.json</param-value>
         </init-param>
     </filter>
     <filter-mapping>
