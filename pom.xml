@@ -19,51 +19,61 @@
 			<artifactId>cas-client-core</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.1</version>
-        </dependency>
-
-        <!-- 日志相关 start-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.20</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>  
-            <artifactId>jcl-over-slf4j</artifactId>  
-            <version>1.7.12</version>  
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.20</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <!-- 日志相关 end-->
-        
-		<!-- 
 		<dependency>
-			<groupId>org.apereo.cas</groupId>
-			<artifactId>cas-server-support-jdbc-drivers</artifactId>
-			<version>5.0.1</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.1</version>
 		</dependency>
-		-->
+
+		<!-- 日志相关 start -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.20</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.20</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<!-- 日志相关 end -->
+
+		<!-- <dependency> <groupId>org.apereo.cas</groupId> <artifactId>cas-server-support-jdbc-drivers</artifactId> 
+			<version>5.0.1</version> </dependency> -->
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<!--默认源代码目录 -->
+		<sourceDirectory>src/main/java </sourceDirectory>
+		<!--默认测试源代码目录 -->
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<!--默认资源目录 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<!--默认测试资源目录 -->
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
