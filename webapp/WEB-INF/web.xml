@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>casclient</display-name>
+
+	<listener>
+		<description>spring listener</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+
+
+
+
+
+    <!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
+    <listener>
+        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener
+        </listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    
+    <!-- 该过滤器用于实现单点登出功能，可选配置。 -->
+    <filter>
+        <filter-name>CAS Single Sign Out Filter</filter-name>
+        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter
+        </filter-class>
+        <init-param>
+           <param-name>casServerUrlPrefix</param-name>
+           <param-value>https://smart:8443/cas</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CAS Single Sign Out Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    <!--Wraps an HttpServletRequest so that the getRemoteUser and getPrincipal 
+        return the CAS related entries. -->
+     <filter>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- 该过滤器负责用户的认证工作，必须启用它 -->
+    <filter>
+        <filter-name>CASFilter</filter-name>
+        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter
+        </filter-class>
+        <init-param>
+            <param-name>casServerLoginUrl</param-name>
+            <param-value>https://smart:8443/cas/login</param-value>
+        </init-param>
+    
+        <init-param>
+            <!--这里的service 为提交的service 这里其实就是提交到你未配置cas的时候，在session 中放入username的地方。 -->
+            <param-name>serverName</param-name>
+            <param-value>https://smart:7443/casclient/login.json</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CASFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+    <!-- 该过滤器负责对Ticket的校验工作，必须启用它 -->
+    <filter>
+        <filter-name>CAS Validation Filter</filter-name>
+        <filter-class>
+            org.jasig.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter
+        </filter-class>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>https://smart:8443/cas</param-value>
+        </init-param>
+        <init-param>
+            <!--这里的service 为提交的service 这里其实就是提交到你未配置cas的时候，在session 中放入username的地方。 -->
+            <param-name>serverName</param-name>
+            <param-value>https://smart:7443/casclient/login.json</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CAS Validation Filter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
